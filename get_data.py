@@ -43,22 +43,16 @@ def get_all_splits():
             image = Image.open(filename)
             images.append(get_data_from(image))
 
+        # gets the train test split for each animal
         x_train, x_test, y_train, y_test = get_test_train(images, animal)
 
+        # appends the animals individual arrays to the master train-test split
         master_x_train = fill_array(master_x_train, x_train)
         master_y_train = fill_array(master_y_train, y_train)
         master_x_test = fill_array(master_x_test, x_test)
         master_y_test = fill_array(master_y_test, y_test)
 
-        # np.concatenate((master_x_train, x_train))
-        # np.concatenate((master_x_test, x_test))
-        # np.concatenate((master_y_train, y_train))
-        # np.concatenate((master_y_test, y_test))
-
-        # master_x_test += x_test
-        # master_y_train += y_train
-        # master_y_test += y_test
-
+    # returns the giant test-train data tuple encompassing every image to be used
     return (np.array(master_x_train), np.array(master_x_test)), (np.array(master_y_train), np.array(master_y_test))
 
 
