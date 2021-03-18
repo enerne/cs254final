@@ -23,11 +23,18 @@ def get_data_from(image):
     arr = arr.flatten()
     return arr
 
+
+def fill_array(arr, with_arr):
+    for item in with_arr:
+        arr.append(item)
+    return arr
+
+
 def get_all_splits():
     dir = "output/data/train"
     # 8196, 6147 train 2049 test
-    master_x_train = master_y_train = np.empty(shape=(6147, 12288,))
-    master_x_test = master_y_test = np.empty(shape=(2049, 12288,))
+    master_x_train = master_y_train = []
+    master_x_test = master_y_test = []
     for file in os.listdir(dir):
         animal = file.split("_")[0]
         images = []
@@ -38,16 +45,21 @@ def get_all_splits():
 
         x_train, x_test, y_train, y_test = get_test_train(images, animal)
 
-        np.concatenate((master_x_train, x_train))
-        np.concatenate((master_x_test, x_test))
-        np.concatenate((master_y_train, y_train))
-        np.concatenate((master_y_test, y_test))
+        master_x_train = fill_array(master_x_train, x_train)
+        master_y_train = fill_array(master_y_train, y_train)
+        master_x_test = fill_array(master_x_test, x_test)
+        master_y_test = fill_array(master_y_test, y_test)
+
+        # np.concatenate((master_x_train, x_train))
+        # np.concatenate((master_x_test, x_test))
+        # np.concatenate((master_y_train, y_train))
+        # np.concatenate((master_y_test, y_test))
 
         # master_x_test += x_test
         # master_y_train += y_train
         # master_y_test += y_test
 
-    return (master_x_train, master_x_test), (master_y_train, master_y_test)
+    return (np.array(master_x_train), np.array(master_x_test)), (np.array(master_y_train), np.array(master_y_test))
 
 
 if __name__ == "__main__":

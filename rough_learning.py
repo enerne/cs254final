@@ -8,3 +8,5 @@ o = x_train[0]
 print(type(o))
 print(o.shape)
 print(o)
+
+# ok at this point we have lists in the proper formats, we can implement the algorithm now
