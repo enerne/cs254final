@@ -11,7 +11,7 @@ It is a computer vision project that will be able to distinguish between 5 diffe
 
 
 
-##Files
+## Files
 At the moment, there are 5 .py files:   
 - constants.py:
     - holds all the constants to be referred to (should probably be updated)
