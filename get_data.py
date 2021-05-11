@@ -14,7 +14,8 @@ def get_test_train(images, label):
         print(label)
 
     y = np.array([c.value_of[label]] * len(images))
-    return (np.array(i) for i in train_test_split(images, y, test_size=0.25, random_state=0))
+    X_train, X_test, y_train, y_test = train_test_split(images, y, test_size=0.25, random_state=0)
+    return X_train, X_test, y_train, y_test
 
 
 def get_data_from(image):
